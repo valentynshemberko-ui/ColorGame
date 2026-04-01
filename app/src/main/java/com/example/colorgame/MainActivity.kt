@@ -1,20 +1,35 @@
 package com.example.colorgame
 
+import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var buttons: List<Button>
+    private val colors = arrayOf(Color.RED, Color.YELLOW, Color.GREEN)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        buttons = listOf(
+            findViewById(R.id.btn1), findViewById(R.id.btn2), findViewById(R.id.btn3),
+            findViewById(R.id.btn4), findViewById(R.id.btn5), findViewById(R.id.btn6),
+            findViewById(R.id.btn7), findViewById(R.id.btn8), findViewById(R.id.btn9),
+            findViewById(R.id.btn10), findViewById(R.id.btn11), findViewById(R.id.btn12),
+            findViewById(R.id.btn13), findViewById(R.id.btn14), findViewById(R.id.btn15)
+        )
+
+        startGame()
+    }
+
+    private fun startGame() {
+        for (btn in buttons) {
+            val randomColor = colors.random()
+            btn.setBackgroundColor(randomColor)
+            btn.tag = randomColor
         }
     }
 }

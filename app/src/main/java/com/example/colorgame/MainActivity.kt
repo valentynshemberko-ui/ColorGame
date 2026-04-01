@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
         )
 
         startGame()
+
+        for (btn in buttons) {
+            btn.setOnClickListener {
+                changeColor(it as Button)
+            }
+        }
     }
 
     private fun startGame() {
@@ -31,5 +37,16 @@ class MainActivity : AppCompatActivity() {
             btn.setBackgroundColor(randomColor)
             btn.tag = randomColor
         }
+    }
+
+    private fun changeColor(btn: Button) {
+        val currentColor = btn.tag as Int
+        val currentIndex = colors.indexOf(currentColor)
+
+        val nextIndex = (currentIndex + 1) % colors.size
+        val nextColor = colors[nextIndex]
+
+        btn.setBackgroundColor(nextColor)
+        btn.tag = nextColor
     }
 }
